@@ -73,3 +73,15 @@ async function getCharactersAsync(data) {
     console.error("[async/await error] ", error.message);
   }
 })();
+
+// Fetch Disney Data Example
+
+// API Endpoint / URL
+const DISNEY_API_URL = "https://api.disneyapi.dev/character";
+// Fetch logic
+async function fetchCharacters(url) {}
+// Execute Fetch in DOMContentLoaded so that it happens ASAP
+document.addEventListener("DOMContentLoaded", async () => {
+  // run our fetch here in a try/catch block
+  // do stuff with data to customize how it is returned
+});
