@@ -79,9 +79,31 @@ async function getCharactersAsync(data) {
 // API Endpoint / URL
 const DISNEY_API_URL = "https://api.disneyapi.dev/character";
 // Fetch logic
-async function fetchCharacters(url) {}
+async function fetchCharacters(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Network Response Not OK: ${response.status}`);
+    }
+    const json = await response.json();
+    // Destructure data out of json with { }
+    const { data } = json;
+    return data;
+  } catch (error) {
+    console.error("ERROR Fetching Data: ", error);
+  }
+}
 // Execute Fetch in DOMContentLoaded so that it happens ASAP
 document.addEventListener("DOMContentLoaded", async () => {
-  // run our fetch here in a try/catch block
-  // do stuff with data to customize how it is returned
+  try {
+    const characters = await fetchCharacters(DISNEY_API_URL);
+    characters.forEach((character) => {
+      const { name, imageUrl } = character;
+      console.log(name, imageUrl);
+    });
+  } catch (error) {
+    console.error("Data rendering error: ", error.message);
+  } finally {
+    console.log(`REQUEST FROM: ${DISNEY_API_URL} COMPLETED`);
+  }
 });
